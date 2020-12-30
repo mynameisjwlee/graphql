@@ -3,8 +3,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const _1 = __importDefault(require("."));
 const test_api_1 = __importDefault(require("./rest/test.api"));
+const _1 = __importDefault(require("."));
 const apiDefinition = {
     [_1.default.REST_TEST]: new test_api_1.default(),
 };
