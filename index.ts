@@ -8,40 +8,6 @@ import { BookResolver } from './apis/gql/book.resolver';
 const app = express();
 app.use(express.json());
 
-// TODO: type-graphql, graphql-tools, graphql codegen 등 써서 구조화하기
-// const schema = gql`
-//   type Query {
-//     me: User
-//     user(username: String!): User
-//   }
- 
-//   type User {
-//     id: ID!  
-//     username: String!
-//     age: Int
-//     address: String
-//     friends: [User]
-//   }
-// `;
- 
-// const resolvers = {
-//   Query: {
-//     me: () => {
-//         return {
-//             username: 'Robin Wieruch',
-//             age: 32,
-//             address: 'San Francisco',
-//             friends: [{ username: 2 }, { username: 3 }]
-//         };
-//     },
-//     user: (parent: any, { username }: { username: string }) => {
-//         return {
-//             username,
-//         }
-//     },
-//   },
-// };
-
 const gqlSchema = buildSchemaSync({
   resolvers: [
     BookResolver,
