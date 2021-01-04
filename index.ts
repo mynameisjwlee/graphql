@@ -2,8 +2,9 @@ import express from 'express';
 import TestApi from './apis/rest/test.api';
 import APIS from './apis/rest';
 import { buildSchemaSync } from 'type-graphql';
-import { ApolloServer, gql } from 'apollo-server-express';
-import { BookResolver } from './apis/gql/book.resolver';
+import { ApolloServer } from 'apollo-server-express';
+import { BookResolver } from './apis/gql/resolvers/book.resolver';
+import { StudentResolver } from './apis/gql/resolvers/student.resolver';
 
 const app = express();
 app.use(express.json());
@@ -11,6 +12,7 @@ app.use(express.json());
 const gqlSchema = buildSchemaSync({
   resolvers: [
     BookResolver,
+    StudentResolver,
   ],
   validate: false,
 });

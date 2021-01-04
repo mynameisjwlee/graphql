@@ -1,11 +1,11 @@
 import { ObjectType, Field } from 'type-graphql';
 import 'reflect-metadata';
 
-@ObjectType()
+@ObjectType({ description: '책 정보' })
 export class Book {
-    @Field()
+    @Field({ description: '책 제목' })
     title: string;
 
-    @Field()
+    @Field({ description: '책 저자' })
     author: string;
 }

@@ -8,43 +8,14 @@ const test_api_1 = __importDefault(require("./apis/rest/test.api"));
 const rest_1 = __importDefault(require("./apis/rest"));
 const type_graphql_1 = require("type-graphql");
 const apollo_server_express_1 = require("apollo-server-express");
-const book_resolver_1 = require("./apis/gql/book.resolver");
+const book_resolver_1 = require("./apis/gql/resolvers/book.resolver");
+const student_resolver_1 = require("./apis/gql/resolvers/student.resolver");
 const app = express_1.default();
 app.use(express_1.default.json());
-// TODO: type-graphql, graphql-tools, graphql codegen 등 써서 구조화하기
-// const schema = gql`
-//   type Query {
-//     me: User
-//     user(username: String!): User
-//   }
-//   type User {
-//     id: ID!  
-//     username: String!
-//     age: Int
-//     address: String
-//     friends: [User]
-//   }
-// `;
-// const resolvers = {
-//   Query: {
-//     me: () => {
-//         return {
-//             username: 'Robin Wieruch',
-//             age: 32,
-//             address: 'San Francisco',
-//             friends: [{ username: 2 }, { username: 3 }]
-//         };
-//     },
-//     user: (parent: any, { username }: { username: string }) => {
-//         return {
-//             username,
-//         }
-//     },
-//   },
-// };
 const gqlSchema = type_graphql_1.buildSchemaSync({
     resolvers: [
         book_resolver_1.BookResolver,
+        student_resolver_1.StudentResolver,
     ],
     validate: false,
 });
