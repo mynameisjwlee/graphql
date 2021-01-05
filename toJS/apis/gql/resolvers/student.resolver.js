@@ -96,6 +96,20 @@ let StudentResolver = class StudentResolver {
         this.studentList.push(newStudent);
         return newStudent;
     }
+    update(id, name, information, age, address, email) {
+        const targetStudent = this.studentList[id - 1];
+        if (name)
+            targetStudent.name = name;
+        if (information)
+            targetStudent.information = Object.assign({}, information);
+        if (age)
+            targetStudent.age = age;
+        if (address)
+            targetStudent.address = address;
+        if (email)
+            targetStudent.email = email;
+        return targetStudent;
+    }
 };
 __decorate([
     type_graphql_1.Query(() => [student_type_1.Student]),
@@ -121,6 +135,18 @@ __decorate([
     __metadata("design:paramtypes", [String, InformationInputType, Number, String, String]),
     __metadata("design:returntype", student_type_1.Student)
 ], StudentResolver.prototype, "register", null);
+__decorate([
+    type_graphql_1.Mutation(() => student_type_1.Student),
+    __param(0, type_graphql_1.Arg('id')),
+    __param(1, type_graphql_1.Arg('name', { nullable: true })),
+    __param(2, type_graphql_1.Arg('information', { nullable: true })),
+    __param(3, type_graphql_1.Arg('age', { nullable: true })),
+    __param(4, type_graphql_1.Arg('address', { nullable: true })),
+    __param(5, type_graphql_1.Arg('email', { nullable: true })),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, String, InformationInputType, Number, String, String]),
+    __metadata("design:returntype", student_type_1.Student)
+], StudentResolver.prototype, "update", null);
 StudentResolver = __decorate([
     type_graphql_1.Resolver(),
     __metadata("design:paramtypes", [])

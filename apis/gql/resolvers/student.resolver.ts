@@ -1,4 +1,4 @@
-import { Resolver, Query, Arg, Mutation, InputType, Field } from "type-graphql";
+import { Resolver, Query, Arg, Mutation, InputType, Field, Args } from "type-graphql";
 import { Student } from "../types/student.type";
 
 @InputType({ description: 'type of information' })
@@ -91,5 +91,23 @@ export class StudentResolver {
         };
         this.studentList.push(newStudent);
         return newStudent;
+    }
+
+    @Mutation(() => Student)
+    public update(
+        @Arg('id') id: number,
+        @Arg('name', { nullable: true }) name?: string,
+        @Arg('information', { nullable: true }) information?: InformationInputType,
+        @Arg('age', { nullable: true }) age?: number,
+        @Arg('address', { nullable: true }) address?: string,
+        @Arg('email', { nullable: true }) email?: string, 
+    ): Student {
+        const targetStudent: Student = this.studentList[id - 1];
+        if (name) targetStudent.name = name;
+        if (information) targetStudent.information =  { ...information };
+        if (age) targetStudent. age = age;
+        if (address) targetStudent.address = address;
+        if (email) targetStudent.email = email;
+        return targetStudent;
     }
 }
