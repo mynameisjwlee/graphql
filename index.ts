@@ -1,9 +1,7 @@
 import { ApolloServer } from 'apollo-server-express';
 import express from 'express';
-import { buildSchemaSync } from 'type-graphql';
 
-import { BookResolver } from './apis/gql/resolvers/book.resolver';
-import { StudentResolver } from './apis/gql/resolvers/student.resolver';
+import { schema } from './apis/gql/resolvers';
 import APIS from './apis/rest';
 import TestApi from './apis/rest/test.api';
 
@@ -11,15 +9,7 @@ function startServer() {
   const app = express();
   app.use(express.json());
 
-  const gqlSchema = buildSchemaSync({
-    resolvers: [
-      BookResolver,
-      StudentResolver,
-    ],
-    validate: false,
-  });
-
-  const gqlServer = new ApolloServer({ schema: gqlSchema });
+  const gqlServer = new ApolloServer({ schema });
   gqlServer.applyMiddleware({ app, path: '/graphql' });
 
   const restTest = new TestApi();

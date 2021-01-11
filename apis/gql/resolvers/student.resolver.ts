@@ -1,6 +1,6 @@
 import { Resolver, Query, Arg, Mutation, InputType, Field } from 'type-graphql';
 
-import { Student } from '../types/student.type';
+import { Student } from '../types';
 
 @InputType({ description: 'type of information' })
 class InformationInputType {

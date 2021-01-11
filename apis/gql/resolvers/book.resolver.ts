@@ -1,6 +1,6 @@
 import { Resolver, Query, Mutation, Arg } from 'type-graphql';
 
-import { Book } from '../types/book.type';
+import { Book } from '../types';
 
 @Resolver()
 export class BookResolver {
