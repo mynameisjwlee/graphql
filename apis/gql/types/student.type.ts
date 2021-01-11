@@ -27,6 +27,9 @@ export class Student {
   @Field({ description: '정보' })
   information: Information;
 
+  @Field({ description: '미성년자 여부', nullable: true })
+  isUnderage?: boolean;
+
   @Field({ description: '나이', nullable: true })
   age?: number;
 

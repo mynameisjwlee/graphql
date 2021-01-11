@@ -1,6 +1,6 @@
-import { Resolver, Query, Arg, Mutation, InputType, Field } from 'type-graphql';
+import { Resolver, Query, Arg, Mutation, InputType, Field, FieldResolver, Root } from 'type-graphql';
 
-import { studentDatas } from '../models';
+import { StudentData, studentDatas } from '../models';
 import { Student } from '../types';
 
 @InputType({ description: 'type of information' })
@@ -75,5 +75,17 @@ export class StudentResolver {
     if (address) { targetStudent.address = address; }
     if (email) { targetStudent.email = email; }
     return targetStudent;
+  }
+}
+
+@Resolver(() => Student)
+export class StudentModelResolver {
+  @FieldResolver()
+  isUnderage(@Root() student: StudentData) {
+    if (!student.age) {
+      return null;
+    }
+
+    return student.age <= 19;
   }
 }
