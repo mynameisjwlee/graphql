@@ -1,5 +1,6 @@
 import { Resolver, Query, Arg, Mutation, InputType, Field } from 'type-graphql';
 
+import { studentDatas } from '../models';
 import { Student } from '../types';
 
 @InputType({ description: 'type of information' })
@@ -23,43 +24,7 @@ export class StudentResolver {
   private studentNumber: number;
 
   constructor() {
-    this.studentList = [
-      {
-        id: 1,
-        name: 'Lee',
-        information: {
-          department: 'software',
-          major: 'software',
-          semester: 3,
-          doubleMajor: false,
-        },
-        age: 23,
-        address: 'sejonro',
-        email: 'asdf@naver.com',
-      },
-      {
-        id: 2,
-        name: 'Kevin',
-        information: {
-          department: 'scholar',
-          major: 'thinking',
-          semester: 7,
-          doubleMajor: true,
-        },
-      },
-      {
-        id: 3,
-        name: 'blaise',
-        information: {
-          department: 'mathematics',
-          major: 'linear algebra',
-          semester: 4,
-          doubleMajor: false,
-        },
-        age: 32,
-        email: 'qwerty@gmail.com',
-      },
-    ];
+    this.studentList = studentDatas;
     this.studentNumber = 3;
   }
 

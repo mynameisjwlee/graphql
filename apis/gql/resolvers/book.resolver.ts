@@ -1,5 +1,6 @@
 import { Resolver, Query, Mutation, Arg } from 'type-graphql';
 
+import { bookDatas } from '../models';
 import { Book } from '../types';
 
 @Resolver()
@@ -7,16 +8,7 @@ export class BookResolver {
   private items: Book[];
 
   constructor() {
-    this.items = [
-      {
-        title: 'Harry Potter',
-        author: 'J.K. Rowling',
-      },
-      {
-        title: 'Jurassic Park',
-        author: 'Michale Crichton',
-      },
-    ];
+    this.items = bookDatas;
   }
 
   @Query(() => [Book])
