@@ -1,0 +1,12 @@
+generates:
+  ./apis/gql/schema-first-style/schema/book.type.ts:
+    schema: './apis/gql/schema-first-style/schema/book.graphql'
+    plugins:
+      - typescript
+      - typescript-resolvers
+
+  ./apis/gql/schema-first-style/schema/student.type.ts:
+    schema: './apis/gql/schema-first-style/schema/student.graphql'
+    plugins:
+      - typescript
+      - typescript-resolvers

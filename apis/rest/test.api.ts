@@ -2,7 +2,10 @@ import express from 'express';
 
 class TestApi {
     public async get(req: express.Request, res: express.Response) {
-        const mockData = {
+        const mockData: {
+            name: string;
+            age: number;
+        } = {
             name: 'helen',
             age: 22,
         };

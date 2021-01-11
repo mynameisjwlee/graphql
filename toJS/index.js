@@ -8,14 +8,12 @@ const test_api_1 = __importDefault(require("./apis/rest/test.api"));
 const rest_1 = __importDefault(require("./apis/rest"));
 const type_graphql_1 = require("type-graphql");
 const apollo_server_express_1 = require("apollo-server-express");
-const book_resolver_1 = require("./apis/gql/resolvers/book.resolver");
-const student_resolver_1 = require("./apis/gql/resolvers/student.resolver");
+const book_resolver_1 = require("./apis/gql/code-first-style/resolvers/book.resolver");
 const app = express_1.default();
 app.use(express_1.default.json());
 const gqlSchema = type_graphql_1.buildSchemaSync({
     resolvers: [
         book_resolver_1.BookResolver,
-        student_resolver_1.StudentResolver,
     ],
     validate: false,
 });

@@ -1,0 +1,33 @@
+
+type Information {
+    department: String!
+    major: String!
+    semester: Int!
+    doubleMajor: Boolean!
+}
+
+type InformationInputType {
+    department: String
+    major: String
+    semester: Int
+    doubleMajor: Boolean
+}
+
+type Student {
+    id: ID!
+    name: String!
+    information: Information!
+    age: Int
+    address: String
+    email: String
+}
+
+type Query {
+    student(id: Int!): Student!
+    students: [Student!]!
+}
+
+type Mutation {
+    register(name: String!, information: Information!, age: Int, address: String, email: String): Student!
+    update(id: ID!, name: String, information: InformationInputType, age: Int, address: String, email: String): Student!
+}
