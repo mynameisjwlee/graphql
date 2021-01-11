@@ -1,6 +1,6 @@
 
 const APIS = {
-    TEST: '/test' 
+  TEST: '/test',
 };
 
 export default APIS;
