@@ -1,27 +1,26 @@
-import express from 'express';
-import TestApi from './apis/rest/test.api';
-import APIS from './apis/rest';
-import { buildSchemaSync } from 'type-graphql';
 import { ApolloServer } from 'apollo-server-express';
-import { BookResolver } from './apis/gql/code-first-style/resolvers/book.resolver';
-import { StudentResolver } from './apis/gql/code-first-style/resolvers/student.resolver';
+import express from 'express';
+import { schema } from './apis/gql/code-first-style/resolvers';
+import APIS from './apis/rest';
+import TestApi from './apis/rest/test.api';
 
-const app = express();
-app.use(express.json());
+function startServer() {
+  const app = express();
+  app.use(express.json());
 
-// code-first-style using 'type-graphql'
-const gqlSchema = buildSchemaSync({
-  resolvers: [
-    BookResolver,
-    StudentResolver,
-  ],
-  validate: false,
-});
+  const gqlServer = new ApolloServer({ schema });
+  gqlServer.applyMiddleware({ app, path: '/graphql' });
 
-const gqlServer = new ApolloServer({ schema: gqlSchema });
-gqlServer.applyMiddleware({ app, path: '/graphql' });
+  const restTest = new TestApi();
+  // eslint-disable-next-line @typescript-eslint/unbound-method
+  app.get(APIS.TEST, restTest.get);
 
-const restTest = new TestApi();
-app.get(APIS.TEST, restTest.get);
+  const port = 3000;
+  app.listen(port, () => {
+    console.log(`[${new Date().toISOString()}] Started at http://localhost:${port}`);
+  });
+}
 
-app.listen(3000);
+(() => {
+  startServer();
+})();
