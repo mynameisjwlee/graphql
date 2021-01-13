@@ -33,7 +33,7 @@ export const studentResolver: Resolvers = {
             if (email) targetStudent.email = email;
             if (information) {
                 // 왜 이상하게 인식되지..
-                // targetStudent.information.doubleMajor = information.department ?? null;
+                // targetStudent.information.doubleMajor = information.department ?? targetStudent.information.doubleMajor;
                 if (information.department) targetStudent.information.department = information.department;
                 if (information.major) targetStudent.information.major = information.major;
                 if (information.semester) targetStudent.information.semester = information.semester;
