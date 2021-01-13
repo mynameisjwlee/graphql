@@ -78,6 +78,7 @@ export class StudentResolver {
   }
 }
 
+// '() => Student'(또는 그냥 'Student') 라고 명시해줌으로써 @Root가 Parent를 제대로 가리키게 하는 듯..?
 @Resolver(() => Student)
 export class StudentModelResolver {
   @FieldResolver()
