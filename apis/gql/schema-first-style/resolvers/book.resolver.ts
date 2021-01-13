@@ -1,9 +1,9 @@
 import { Resolvers, Book } from '../schema/book.type';
-import { bookDatas, BookData } from '../models';
+import { bookDatas } from '../models';
 
-const bookResolver: Resolvers = {
+export const bookResolver: Resolvers = {
     Query: {
-        books: (_): BookData[] => {
+        books: (): Book[] => {
             return bookDatas;
         },
     },

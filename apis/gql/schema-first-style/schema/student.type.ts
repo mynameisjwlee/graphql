@@ -31,10 +31,11 @@ export type InformationInputType = {
 
 export type Student = {
   __typename?: 'Student';
-  id: Scalars['ID'];
+  id: Scalars['Int'];
   name: Scalars['String'];
   information: Information;
   age?: Maybe<Scalars['Int']>;
+  isUnderage?: Maybe<Scalars['Boolean']>;
   address?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
 };
@@ -67,7 +68,7 @@ export type MutationRegisterArgs = {
 
 
 export type MutationUpdateArgs = {
-  id: Scalars['ID'];
+  id: Scalars['Int'];
   name?: Maybe<Scalars['String']>;
   information?: Maybe<InformationInputType>;
   age?: Maybe<Scalars['Int']>;
@@ -159,7 +160,6 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   InformationInputType: ResolverTypeWrapper<InformationInputType>;
   Student: ResolverTypeWrapper<Student>;
-  ID: ResolverTypeWrapper<Scalars['ID']>;
   Query: ResolverTypeWrapper<{}>;
   Mutation: ResolverTypeWrapper<{}>;
 };
@@ -172,7 +172,6 @@ export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
   InformationInputType: InformationInputType;
   Student: Student;
-  ID: Scalars['ID'];
   Query: {};
   Mutation: {};
 };
@@ -194,10 +193,11 @@ export type InformationInputTypeResolvers<ContextType = any, ParentType extends 
 };
 
 export type StudentResolvers<ContextType = any, ParentType extends ResolversParentTypes['Student'] = ResolversParentTypes['Student']> = {
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   information?: Resolver<ResolversTypes['Information'], ParentType, ContextType>;
   age?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  isUnderage?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;

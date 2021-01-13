@@ -9,9 +9,9 @@ export interface StudentData {
   id: number;
   name: string;
   information: InformationData;
-  age?: number;
-  address?: string;
-  email?: string;
+  age?: number | null;
+  address?: string | null;
+  email?: string | null;
 }
 
 export const studentDatas: StudentData[] = [

@@ -14,10 +14,11 @@ type InformationInputType {
 }
 
 type Student {
-    id: ID!
+    id: Int!
     name: String!
     information: Information!
     age: Int
+    isUnderage: Boolean
     address: String
     email: String
 }
@@ -29,5 +30,5 @@ type Query {
 
 type Mutation {
     register(name: String!, information: Information!, age: Int, address: String, email: String): Student!
-    update(id: ID!, name: String, information: InformationInputType, age: Int, address: String, email: String): Student!
+    update(id: Int!, name: String, information: InformationInputType, age: Int, address: String, email: String): Student!
 }

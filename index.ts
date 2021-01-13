@@ -8,7 +8,11 @@ function startServer() {
   const app = express();
   app.use(express.json());
 
+  // code-first 
   const gqlServer = new ApolloServer({ schema });
+
+  // schema-first
+
   gqlServer.applyMiddleware({ app, path: '/graphql' });
 
   const restTest = new TestApi();
