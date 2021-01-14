@@ -1,15 +1,14 @@
 import { Resolvers, Book } from '../schema/book.type';
 import { bookDatas } from '../models';
 
-export const bookResolver: Resolvers = {
+export const BookResolver: Resolvers = {
     Query: {
         books: (): Book[] => {
             return bookDatas;
         },
     },
     Mutation: {
-        createBook: (_, args): Book => {
-            const { title, author }: { title: string, author: string } = args;
+        createBook: (_, { title, author }): Book => {
             const newBook: Book = {
                 title,
                 author,

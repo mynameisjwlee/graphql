@@ -1,7 +1,7 @@
 import { Resolvers, Student } from "../schema/student.type";
 import { studentDatas } from '../models';
 
-export const studentResolver: Resolvers = {
+export const StudentResolver: Resolvers = {
     Query: {
         student: (_, { id }): Student => {
             const idx: number = id - 1;

@@ -1,18 +1,25 @@
 import { ApolloServer } from 'apollo-server-express';
 import express from 'express';
-import { schema } from './apis/gql/code-first-style/resolvers';
+// import { schema } from './apis/gql/code-first-style/resolvers';
 import APIS from './apis/rest';
 import TestApi from './apis/rest/test.api';
+import { makeExecutableSchema } from 'graphql-tools';
+import mergedTypeDefs from './apis/gql/schema-first-style/schema/index';
+import mergedResolvers from './apis/gql/schema-first-style/resolvers/index';
 
 function startServer() {
   const app = express();
   app.use(express.json());
 
   // code-first 
-  const gqlServer = new ApolloServer({ schema });
+  // const gqlServer = new ApolloServer({ schema });
 
   // schema-first
-
+  const schema = makeExecutableSchema({
+    typeDefs: mergedTypeDefs,
+    resolvers: mergedResolvers,
+  });
+  const gqlServer = new ApolloServer({ schema });
   gqlServer.applyMiddleware({ app, path: '/graphql' });
 
   const restTest = new TestApi();
