@@ -1,6 +1,9 @@
 import path from 'path';
 
-import { mergeResolvers, loadFilesSync } from 'graphql-tools';
+import {
+  loadFilesSync,
+  mergeResolvers,
+} from 'graphql-tools';
 
 const allResolvers = loadFilesSync(path.join(__dirname, '*.resolver.ts'));
 const mergedResolvers = mergeResolvers(allResolvers);

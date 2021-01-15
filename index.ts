@@ -1,17 +1,17 @@
 import { ApolloServer } from 'apollo-server-express';
 import express from 'express';
-// import { schema } from './apis/gql/code-first-style/resolvers';
+import { makeExecutableSchema } from 'graphql-tools';
+
+import mergedResolvers from './apis/gql/schema-first-style/resolvers/index';
+import mergedTypeDefs from './apis/gql/schema-first-style/schema/index';
 import APIS from './apis/rest';
 import TestApi from './apis/rest/test.api';
-import { makeExecutableSchema } from 'graphql-tools';
-import mergedTypeDefs from './apis/gql/schema-first-style/schema/index';
-import mergedResolvers from './apis/gql/schema-first-style/resolvers/index';
 
 function startServer() {
   const app = express();
   app.use(express.json());
 
-  // code-first 
+  // code-first
   // const gqlServer = new ApolloServer({ schema });
 
   // schema-first
@@ -20,7 +20,10 @@ function startServer() {
     resolvers: mergedResolvers,
   });
   const gqlServer = new ApolloServer({ schema });
-  gqlServer.applyMiddleware({ app, path: '/graphql' });
+  gqlServer.applyMiddleware({
+    app,
+    path: '/graphql',
+  });
 
   const restTest = new TestApi();
   // eslint-disable-next-line @typescript-eslint/unbound-method
