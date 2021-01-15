@@ -1,4 +1,5 @@
 import { buildSchemaSync } from 'type-graphql';
+
 import { BookResolver } from './book.resolver';
 import { StudentResolver, StudentModelResolver } from './student.resolver';
 
