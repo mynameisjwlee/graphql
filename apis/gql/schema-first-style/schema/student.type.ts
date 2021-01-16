@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { GraphQLResolveInfo } from 'graphql';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -77,7 +76,8 @@ export type MutationUpdateArgs = {
   email?: Maybe<Scalars['String']>;
 };
 
-
+export type WithIndex<TObject> = TObject & Record<string, any>;
+export type ResolversObject<TObject> = WithIndex<TObject>;
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
 
@@ -154,7 +154,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 ) => TResult | Promise<TResult>;
 
 /** Mapping between all available schema types and the resolvers types */
-export type ResolversTypes = {
+export type ResolversTypes = ResolversObject<{
   Information: ResolverTypeWrapper<Information>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
@@ -163,10 +163,10 @@ export type ResolversTypes = {
   Student: ResolverTypeWrapper<Student>;
   Query: ResolverTypeWrapper<{}>;
   Mutation: ResolverTypeWrapper<{}>;
-};
+}>;
 
 /** Mapping between all available schema types and the resolvers parents */
-export type ResolversParentTypes = {
+export type ResolversParentTypes = ResolversObject<{
   Information: Information;
   String: Scalars['String'];
   Int: Scalars['Int'];
@@ -175,25 +175,25 @@ export type ResolversParentTypes = {
   Student: Student;
   Query: {};
   Mutation: {};
-};
+}>;
 
-export type InformationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Information'] = ResolversParentTypes['Information']> = {
+export type InformationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Information'] = ResolversParentTypes['Information']> = ResolversObject<{
   department?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   major?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   semester?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   doubleMajor?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
+}>;
 
-export type InformationInputTypeResolvers<ContextType = any, ParentType extends ResolversParentTypes['InformationInputType'] = ResolversParentTypes['InformationInputType']> = {
+export type InformationInputTypeResolvers<ContextType = any, ParentType extends ResolversParentTypes['InformationInputType'] = ResolversParentTypes['InformationInputType']> = ResolversObject<{
   department?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   major?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   semester?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   doubleMajor?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
+}>;
 
-export type StudentResolvers<ContextType = any, ParentType extends ResolversParentTypes['Student'] = ResolversParentTypes['Student']> = {
+export type StudentResolvers<ContextType = any, ParentType extends ResolversParentTypes['Student'] = ResolversParentTypes['Student']> = ResolversObject<{
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   information?: Resolver<ResolversTypes['Information'], ParentType, ContextType>;
@@ -202,25 +202,25 @@ export type StudentResolvers<ContextType = any, ParentType extends ResolversPare
   address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
+}>;
 
-export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
   student?: Resolver<ResolversTypes['Student'], ParentType, ContextType, RequireFields<QueryStudentArgs, 'id'>>;
   students?: Resolver<Array<ResolversTypes['Student']>, ParentType, ContextType>;
-};
+}>;
 
-export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
   register?: Resolver<ResolversTypes['Student'], ParentType, ContextType, RequireFields<MutationRegisterArgs, 'name' | 'information'>>;
   update?: Resolver<ResolversTypes['Student'], ParentType, ContextType, RequireFields<MutationUpdateArgs, 'id'>>;
-};
+}>;
 
-export type Resolvers<ContextType = any> = {
+export type Resolvers<ContextType = any> = ResolversObject<{
   Information?: InformationResolvers<ContextType>;
   InformationInputType?: InformationInputTypeResolvers<ContextType>;
   Student?: StudentResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
-};
+}>;
 
 
 /**

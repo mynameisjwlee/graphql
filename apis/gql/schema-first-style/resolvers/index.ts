@@ -1,11 +1,13 @@
-import path from 'path';
-
 import {
-  loadFilesSync,
   mergeResolvers,
 } from 'graphql-tools';
 
-const allResolvers = loadFilesSync(path.join(__dirname, '*.resolver.ts'));
-const mergedResolvers = mergeResolvers(allResolvers);
+import { BookResolver } from './book.resolver';
+import { StudentResolver } from './student.resolver';
+
+const mergedResolvers = mergeResolvers([
+  BookResolver,
+  StudentResolver,
+]);
 
 export default mergedResolvers;

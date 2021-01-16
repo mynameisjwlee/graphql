@@ -4,9 +4,13 @@ generates:
     plugins:
       - typescript
       - typescript-resolvers
+    config:
+      useIndexSignature: true
 
   ./apis/gql/schema-first-style/schema/student.type.ts:
     schema: './apis/gql/schema-first-style/schema/student.graphql'
     plugins:
       - typescript
       - typescript-resolvers
+    config:
+      useIndexSignature: true
