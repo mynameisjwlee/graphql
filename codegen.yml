@@ -1,14 +1,6 @@
 generates:
-  ./apis/gql/schema-first-style/schema/book.type.ts:
-    schema: './apis/gql/schema-first-style/schema/book.graphql'
-    plugins:
-      - typescript
-      - typescript-resolvers
-    config:
-      useIndexSignature: true
-
-  ./apis/gql/schema-first-style/schema/student.type.ts:
-    schema: './apis/gql/schema-first-style/schema/student.graphql'
+  ./apis/gql/schema-first-style/schema/type.ts:
+    schema: './apis/gql/schema-first-style/schema/index.graphql'
     plugins:
       - typescript
       - typescript-resolvers

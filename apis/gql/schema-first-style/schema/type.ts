@@ -22,17 +22,78 @@ export type Book = {
 export type Query = {
   __typename?: 'Query';
   books: Array<Book>;
+  student: Student;
+  students: Array<Student>;
+};
+
+
+export type QueryStudentArgs = {
+  id: Scalars['Int'];
+};
+
+export type Student = {
+  __typename?: 'Student';
+  id: Scalars['Int'];
+  name: Scalars['String'];
+  information: Information;
+  age?: Maybe<Scalars['Int']>;
+  isUnderage?: Maybe<Scalars['Boolean']>;
+  address?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
   createBook: Book;
+  register: Student;
+  update: Student;
 };
 
 
 export type MutationCreateBookArgs = {
   title: Scalars['String'];
   author: Scalars['String'];
+};
+
+
+export type MutationRegisterArgs = {
+  name: Scalars['String'];
+  information: InformationInputTypeNotNull;
+  age?: Maybe<Scalars['Int']>;
+  address?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+};
+
+
+export type MutationUpdateArgs = {
+  id: Scalars['Int'];
+  name?: Maybe<Scalars['String']>;
+  information?: Maybe<InformationInputType>;
+  age?: Maybe<Scalars['Int']>;
+  address?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+};
+
+export type InformationInputTypeNotNull = {
+  department: Scalars['String'];
+  major: Scalars['String'];
+  semester: Scalars['Int'];
+  doubleMajor: Scalars['Boolean'];
+};
+
+export type InformationInputType = {
+  department?: Maybe<Scalars['String']>;
+  major?: Maybe<Scalars['String']>;
+  semester?: Maybe<Scalars['Int']>;
+  doubleMajor?: Maybe<Scalars['Boolean']>;
+};
+
+export type Information = {
+  __typename?: 'Information';
+  department: Scalars['String'];
+  major: Scalars['String'];
+  semester: Scalars['Int'];
+  doubleMajor: Scalars['Boolean'];
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -117,8 +178,13 @@ export type ResolversTypes = ResolversObject<{
   Book: ResolverTypeWrapper<Book>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Query: ResolverTypeWrapper<{}>;
-  Mutation: ResolverTypeWrapper<{}>;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
+  Student: ResolverTypeWrapper<Student>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  Mutation: ResolverTypeWrapper<{}>;
+  informationInputTypeNotNull: InformationInputTypeNotNull;
+  InformationInputType: InformationInputType;
+  Information: ResolverTypeWrapper<Information>;
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -126,8 +192,13 @@ export type ResolversParentTypes = ResolversObject<{
   Book: Book;
   String: Scalars['String'];
   Query: {};
-  Mutation: {};
+  Int: Scalars['Int'];
+  Student: Student;
   Boolean: Scalars['Boolean'];
+  Mutation: {};
+  informationInputTypeNotNull: InformationInputTypeNotNull;
+  InformationInputType: InformationInputType;
+  Information: Information;
 }>;
 
 export type BookResolvers<ContextType = any, ParentType extends ResolversParentTypes['Book'] = ResolversParentTypes['Book']> = ResolversObject<{
@@ -138,16 +209,41 @@ export type BookResolvers<ContextType = any, ParentType extends ResolversParentT
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
   books?: Resolver<Array<ResolversTypes['Book']>, ParentType, ContextType>;
+  student?: Resolver<ResolversTypes['Student'], ParentType, ContextType, RequireFields<QueryStudentArgs, 'id'>>;
+  students?: Resolver<Array<ResolversTypes['Student']>, ParentType, ContextType>;
+}>;
+
+export type StudentResolvers<ContextType = any, ParentType extends ResolversParentTypes['Student'] = ResolversParentTypes['Student']> = ResolversObject<{
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  information?: Resolver<ResolversTypes['Information'], ParentType, ContextType>;
+  age?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  isUnderage?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
   createBook?: Resolver<ResolversTypes['Book'], ParentType, ContextType, RequireFields<MutationCreateBookArgs, 'title' | 'author'>>;
+  register?: Resolver<ResolversTypes['Student'], ParentType, ContextType, RequireFields<MutationRegisterArgs, 'name' | 'information'>>;
+  update?: Resolver<ResolversTypes['Student'], ParentType, ContextType, RequireFields<MutationUpdateArgs, 'id'>>;
+}>;
+
+export type InformationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Information'] = ResolversParentTypes['Information']> = ResolversObject<{
+  department?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  major?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  semester?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  doubleMajor?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
 export type Resolvers<ContextType = any> = ResolversObject<{
   Book?: BookResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  Student?: StudentResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
+  Information?: InformationResolvers<ContextType>;
 }>;
 
 

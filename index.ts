@@ -1,9 +1,9 @@
 import { ApolloServer } from 'apollo-server-express';
 import express from 'express';
-import { makeExecutableSchema } from 'graphql-tools';
+import { addResolversToSchema } from 'graphql-tools';
 
-import mergedResolvers from './apis/gql/schema-first-style/resolvers/index';
-import mergedTypeDefs from './apis/gql/schema-first-style/schema/index';
+import mergedResolvers from './apis/gql/schema-first-style/resolvers';
+import pure_schema from './apis/gql/schema-first-style/schema';
 import APIS from './apis/rest';
 import TestApi from './apis/rest/test.api';
 
@@ -15,8 +15,8 @@ function startServer() {
   // const gqlServer = new ApolloServer({ schema });
 
   // schema-first
-  const schema = makeExecutableSchema({
-    typeDefs: mergedTypeDefs,
+  const schema = addResolversToSchema({
+    schema: pure_schema,
     resolvers: mergedResolvers,
   });
   const gqlServer = new ApolloServer({ schema });

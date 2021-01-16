@@ -5,11 +5,18 @@ type Information {
     doubleMajor: Boolean!
 }
 
-type InformationInputType {
+input InformationInputType {
     department: String
     major: String
     semester: Int
     doubleMajor: Boolean
+}
+
+input informationInputTypeNotNull {
+    department: String!
+    major: String!
+    semester: Int!
+    doubleMajor: Boolean!
 }
 
 type Student {
@@ -28,6 +35,6 @@ type Query {
 }
 
 type Mutation {
-    register(name: String!, information: Information!, age: Int, address: String, email: String): Student!
+    register(name: String!, information: informationInputTypeNotNull!, age: Int, address: String, email: String): Student!
     update(id: Int!, name: String, information: InformationInputType, age: Int, address: String, email: String): Student!
 }

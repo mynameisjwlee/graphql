@@ -2,7 +2,7 @@ import { studentDatas } from '../models';
 import {
   Resolvers,
   Student,
-} from '../schema/student.type';
+} from '../schema/type';
 
 export const StudentResolver: Resolvers = {
   Query: {

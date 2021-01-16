@@ -2,7 +2,7 @@ import { bookDatas } from '../models';
 import {
   Book,
   Resolvers,
-} from '../schema/book.type';
+} from '../schema/type';
 
 export const BookResolver: Resolvers = {
   Query: {

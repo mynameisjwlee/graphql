@@ -1,11 +1,14 @@
 import path from 'path';
 
 import {
-  loadFilesSync,
-  mergeTypeDefs,
+  loadSchemaSync,
+  GraphQLFileLoader,
 } from 'graphql-tools';
 
-const allTypeDefs = loadFilesSync(path.join(__dirname, '*.graphql'));
-const mergedTypeDefs = mergeTypeDefs(allTypeDefs);
+const pure_schema = loadSchemaSync(path.join(__dirname, 'index.graphql'), {
+  loaders: [
+    new GraphQLFileLoader(),
+  ],
+});
 
-export default mergedTypeDefs;
+export default pure_schema;
